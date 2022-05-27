@@ -1,23 +1,13 @@
-import { useEffect, useState } from "react";
 import Seo from "../components/Seo";
 
 export default function Home({ results }) {
-  // const [movies, setMovies] = useState();
-  //
-  // useEffect(() => {
-  //   (async () => {
-  //     const { results } = await (await fetch(`/api/movies`)).json();
-  //     setMovies(results);
-  //   })();
-  // }, []);
-
   return (
     <div className="container">
       <Seo title="Home" />
       {results?.map((movie) => (
         <div className="movie" key={movie.id}>
           <img
-            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt="movie image"
           />
           <h4>{movie.original_title}</h4>
@@ -51,7 +41,8 @@ export default function Home({ results }) {
   );
 }
 
-// Server Side Rendering 실행 소스
+// Server Side Rendering 실행 소스, server 에서 실행됨,
+// server 에서 실행되기때문에 api 키를 여기에서 숨길수 있음.
 export async function getServerSideProps() {
   const { results } = await (
     await fetch(`http://localhost:3000/api/movies`)
